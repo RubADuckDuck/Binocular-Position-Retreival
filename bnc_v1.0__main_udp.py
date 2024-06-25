@@ -118,7 +118,7 @@ def process_camera_feed():
 
     wfov_degree = 70
     hfov_degree = 30 
-    
+
     camera_rotation_degree = 45 
     camera_rotation_rad = camera_rotation_degree / 180 * math.pi
     
@@ -163,7 +163,7 @@ def process_camera_feed():
 
                 coord_3d_cam1_centered = img_2d_to_3d(position_cam1, fx=fx_focal_length, fy=fy_focal_length, wfov=wfov_rad, hfov=hfov_rad)
                 coord_3d_cam2_centered = img_2d_to_3d(position_cam2, fx=fx_focal_length, fy=fy_focal_length, wfov=wfov_rad, hfov=hfov_rad) 
-                
+ 
                 if camera_rotation_rad != 0: 
                     coord_3d_cam1_centered = np.dot(camera_rot_mat, coord_3d_cam1_centered) 
                     coord_3d_cam2_centered = np.dot(camera_rot_mat.T, coord_3d_cam2_centered) 
@@ -213,7 +213,9 @@ def process_camera_feed():
 
     # camera1.release()
     # camera2.release()
+
     # cv2.destroyAllWindows()
+
     # plt.ioff()
     # plt.show()
 

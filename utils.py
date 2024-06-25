@@ -80,7 +80,7 @@ def live_plot_bnc_result(ax,
 
     plt.draw()
     plt.pause(0.01)
-    
+
 def get_rotation_matrix_y(angle_rad):
     """
     Generate a rotation matrix for rotating around the Y-axis (XZ plane rotation).
@@ -98,7 +98,6 @@ def get_rotation_matrix_y(angle_rad):
     ])
     
     return rotation_matrix
-
 
 hMin = 37
 sMin = 116 

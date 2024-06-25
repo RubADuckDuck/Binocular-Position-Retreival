@@ -197,8 +197,9 @@ async def process_camera_feed(websocket):
     camera1.release()
     camera2.release()
     cv2.destroyAllWindows()
-    plt.ioff()
-    plt.show()
+
+    # plt.ioff()
+    # plt.show()
 
 
 if __name__ == "__main__":
