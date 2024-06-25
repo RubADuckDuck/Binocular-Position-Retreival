@@ -13,11 +13,14 @@ class Camera:
         
         print(f"Webcam {camera_id} opened successfully with resolution {im_width}x{im_height}. Press 'q' to quit.")
 
-    def capture(self):
-        ret, frame = self.cap.read()
-        if not ret:
-            raise ValueError(f"Failed to capture image from camera {self.camera_id}.")
-        return frame
+    def capture(self): 
+        ret, frame = self.cap.read() 
+        if not ret: 
+            raise ValueError(f"Failed to capture image from camera {self.camera_id}.") 
+        return frame 
 
     def release(self):
         self.cap.release()
+
+if __name__=='__main__':
+    Camera

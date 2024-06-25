@@ -26,12 +26,11 @@ class Camera:
 
 
 
-# marker settign 
+# marker setting 
 color_to_find = (0, 132, 96)  # This is in RGB
 threshold = 70
 circle_radius = 10  # Radius of the circle to draw 
-
-circle_color = (0,255,0)
+circle_color = (0, 255, 0)
 
 # camera setting
 screen_w = 1920 
@@ -46,13 +45,27 @@ hfov_rad = hfov_degree / 180 * math.pi
 fx_focal_length = screen_w / (2 * math.tan(wfov_rad / 2))
 fy_focal_length = screen_h / (2 * math.tan(hfov_rad / 2)) 
 
-# positioned at - 1,0,0 
+# positioned at -1, 0, 0 
 camera1 = Camera(0, screen_w, screen_h) 
 camera1_global_coord = np.array([-1, 0, 0])
 
-# positioned at + 1,0,0
+# positioned at +1, 0, 0
 camera2 = Camera(1, screen_w, screen_h)   
 camera2_global_coord = np.array([+1, 0, 0])
 
-camera1.capture()
-camera2.capture()
+while True:
+    frame1 = camera1.capture()
+    frame2 = camera2.capture()
+
+    # Display the frames
+    cv2.imshow('Webcam Feed Cam1', frame1)
+    cv2.imshow('Webcam Feed Cam2', frame2)
+
+    # Break the loop when 'q' key is pressed
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Release the cameras and close all windows
+camera1.release()
+camera2.release()
+cv2.destroyAllWindows()

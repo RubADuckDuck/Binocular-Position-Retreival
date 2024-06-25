@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import time 
-
+import math
 
 
 def find_color_in_img_mean(img, color, threshold=1, blur_ksize=(5, 5), blur_sigma=0):
@@ -99,12 +99,13 @@ def get_rotation_matrix_y(angle_rad):
     
     return rotation_matrix
 
-hMin = 37
-sMin = 116 
-vMin = 137 
-hMax = 163
+hMin = 84
+sMin = 113 
+vMin = 158 
+hMax = 179
 sMax = 255
 vMax = 255
+
 
 # Define the lower and upper bounds of the color you want to track in HSV
 lower_color = np.array([hMin, sMin, vMin])  # Adjust these values for the color to track

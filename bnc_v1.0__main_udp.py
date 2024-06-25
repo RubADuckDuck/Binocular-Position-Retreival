@@ -13,6 +13,7 @@ import struct
 
 import logging
 import time 
+import keyboard
 
 # Define the size of the shared memory segment
 shm_size = 1024
@@ -52,7 +53,7 @@ yellow = (194, 211, 84)
 green = (45, 127, 79)
 purple = (159, 147, 245)
 
-do_plot = False
+do_plot = True
 
 
 def calculate_intersection_of_ray(p1, d1, p2, d2):
@@ -116,10 +117,10 @@ def process_camera_feed():
     screen_w = 1920
     screen_h = 1080
 
-    wfov_degree = 70
+    wfov_degree = 110
     hfov_degree = 30 
 
-    camera_rotation_degree = 45 
+    camera_rotation_degree = 0
     camera_rotation_rad = camera_rotation_degree / 180 * math.pi
     
     # calculate rotation matrix in prior 
@@ -132,9 +133,11 @@ def process_camera_feed():
     fy_focal_length = screen_h / (2 * math.tan(hfov_rad / 2)) 
 
     camera1 = Camera(0, screen_w, screen_h) 
-    camera1_global_coord = np.array([1, 0, 0])
+    camera1_global_coord = np.array([-1, 0, 0])
     camera2 = Camera(1, screen_w, screen_h)   
-    camera2_global_coord = np.array([-1, 0, 0])
+    camera2_global_coord = np.array([1, 0, 0]) 
+
+
 
     max_frames_per_sec = 60
     delay = int(1000 / max_frames_per_sec) 
@@ -155,6 +158,39 @@ def process_camera_feed():
 
             position_cam1 = find_color_coordinates_hsv(cur_img1)
             position_cam2 = find_color_coordinates_hsv(cur_img2)
+
+            # Handle key inputs using keyboard module
+            if keyboard.is_pressed('e'):
+                # exchange camera positions
+                temp = camera1_global_coord 
+                camera1_global_coord = camera2_global_coord
+                camera2_global_coord = temp 
+
+
+            elif keyboard.is_pressed('w'):
+                # invert angle
+                camera_rotation_degree = - camera_rotation_degree
+                camera_rotation_rad = camera_rotation_degree / 180 * math.pi
+                camera_rot_mat = get_rotation_matrix_y(angle_rad=camera_rotation_rad) 
+                print(camera_rotation_degree)
+
+            elif keyboard.is_pressed('u'):  # up arrow key
+                # increase angle
+                camera_rotation_degree += 1  # Increment by 1 degree
+                camera_rotation_rad = camera_rotation_degree / 180 * math.pi
+                camera_rot_mat = get_rotation_matrix_y(angle_rad=camera_rotation_rad)
+                print(camera_rotation_degree)
+
+            elif keyboard.is_pressed('d'):  # down arrow key
+                # decrease angle 
+                camera_rotation_degree -= 1  # Decrement by 1 degree
+                camera_rotation_rad = camera_rotation_degree / 180 * math.pi
+                camera_rot_mat = get_rotation_matrix_y(angle_rad=camera_rotation_rad)
+                print(camera_rotation_degree)
+
+            elif keyboard.is_pressed('q'):
+                break
+            
 
             if position_cam1 is not None and position_cam2 is not None:
                 if do_plot:
@@ -197,27 +233,26 @@ def process_camera_feed():
                                             coord_3d_cam2_centered=coord_3d_cam2_centered, 
                                             intersection_point=intersection_point)
 
-            cv2.imshow('Webcam Feed Cam1', cur_img1)
-            cv2.imshow('Webcam Feed Cam2', cur_img2) 
+            if do_plot:
+                cv2.imshow('Webcam Feed Cam1', cur_img1)
+                cv2.imshow('Webcam Feed Cam2', cur_img2) 
 
             # check time 
             frame_duration = frame_timer.track() 
             fps = 1 / frame_duration 
-            print(f'Current_frames: {fps}')
-
-            # await asyncio.sleep(1 / 120)
+            # print(f'Current_frames: {fps}')
 
             
             if 0xFF == ord('q'):
                 break
 
-    # camera1.release()
-    # camera2.release()
+    camera1.release()
+    camera2.release()
 
-    # cv2.destroyAllWindows()
+    cv2.destroyAllWindows()
 
-    # plt.ioff()
-    # plt.show()
+    plt.ioff()
+    plt.show()
 
 
 def main(): 
