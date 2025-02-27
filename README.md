@@ -1,6 +1,7 @@
 # BNC Tracker
 
-![Video Title](https://www.youtube.com/shorts/bc5Opedi7ms)
+![Video Title](/video/post-kalman.mp4)
+[Check out Blog!](https://rubaduckduck.github.io/2024/07/20/omni_perspect.html)
 
 A binocular camera-based 3D position tracking system that uses two cameras to accurately track objects in three-dimensional space.
 
