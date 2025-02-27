@@ -1,5 +1,7 @@
 # BNC Tracker
 
+![Video Title](https://www.youtube.com/shorts/bc5Opedi7ms)
+
 A binocular camera-based 3D position tracking system that uses two cameras to accurately track objects in three-dimensional space.
 
 ## Overview
