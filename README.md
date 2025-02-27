@@ -1,7 +1,8 @@
 # BNC Tracker
 
-<video src='https://www.youtube.com/shorts/YI32PZjzeMI' width=180> </video>
-[Check out Blog!](https://rubaduckduck.github.io/2024/07/20/omni_perspect.html)
+[![Video Demonstration](/images/video_sumnail.png)](https://www.youtube.com/shorts/YI32PZjzeMI)
+[Check the Blog!](https://rubaduckduck.github.io/2024/07/20/omni_perspect.html)   
+[Unity-side Github](https://github.com/RubADuckDuck/OffaxisProjUnity?tab=readme-ov-file)
 
 A binocular camera-based 3D position tracking system that uses two cameras to accurately track objects in three-dimensional space.
 
